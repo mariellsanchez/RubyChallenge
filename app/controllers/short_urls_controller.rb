@@ -16,12 +16,7 @@ class ShortUrlsController < ApplicationController
 
   def show
     @single_url = ShortUrl.find(params[:id])
-    render json: {
-      status: "SUCCESS",
-      message: 'Loaded short url',
-      data: @single_url
-    },
-    status: :ok
+    redirect_to @single_url.full_url , allow_other_host: true #
   end
 
   def create
