@@ -4,7 +4,6 @@ class ShortUrlsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    # need to fix here
     @short_urls = ShortUrl.all 
     render json: {
       status: "SUCCESS",
@@ -16,7 +15,8 @@ class ShortUrlsController < ApplicationController
 
   def show
     @single_url = ShortUrl.find(params[:id])
-    redirect_to @single_url.full_url , allow_other_host: true #
+    @single_url.update_attribute(:click_count, @single_url.click_count += 1)
+    redirect_to @single_url.full_url , allow_other_host: true
   end
 
   def create
@@ -39,13 +39,21 @@ class ShortUrlsController < ApplicationController
       status: :unprocessable_entity
     end
   end
+  
+  def top
+    @top = ShortUrl.order(click_count: :desc).limit(100)
+    render json: {
+      status: "SUCCESS",
+      message: 'Top 100 urls most accessed loaded',
+      data: @top
+    },
+    status: :ok
+  end
 
   private
 
   def short_url_params
-    # the only params we are going to permit
-    params.permit(:full_url)
+    params.require(:full_url).permit(:tittle)
   end
 
-  
 end
