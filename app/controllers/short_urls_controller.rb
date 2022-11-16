@@ -14,9 +14,19 @@ class ShortUrlsController < ApplicationController
   end
 
   def show
-    @single_url = ShortUrl.find(params[:id])
-    @single_url.update_attribute(:click_count, @single_url.click_count += 1)
-    redirect_to @single_url.full_url, allow_other_host: true
+    begin
+      @single_url = ShortUrl.find(params[:id])
+      @single_url.update_attribute(:click_count, @single_url.click_count += 1)
+      redirect_to @single_url.full_url, allow_other_host: true
+    rescue => e
+      render json: {
+        status: "ERROR",
+        message: 'Not such link',
+        data: e
+      },
+      status: 404
+    end
+    
   end
 
   def create
@@ -27,7 +37,7 @@ class ShortUrlsController < ApplicationController
       render json: {
         status: "SUCCESS",
         message: 'Short url saved',
-        short_code: @short_url.id,
+        short_code: @short_url.id.to_s,
         data: @short_url
       },
       status: :created
@@ -35,6 +45,7 @@ class ShortUrlsController < ApplicationController
       render json: {
         status: "ERROR",
         message: 'Short url NOT saved',
+        errors: "Full url is not a valid url",
         data: @short_url.errors
       },
       status: :unprocessable_entity
@@ -46,7 +57,7 @@ class ShortUrlsController < ApplicationController
     render json: {
       status: "SUCCESS",
       message: 'Top 100 urls most accessed loaded',
-      data: @top
+      urls: @top
     },
     status: :ok
   end

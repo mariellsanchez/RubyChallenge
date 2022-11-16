@@ -9,6 +9,7 @@ class ShortUrl < ApplicationRecord
   
 
   def short_code
+    short_code = id.to_s
   end
 
   def update_title!
@@ -20,6 +21,10 @@ class ShortUrl < ApplicationRecord
     end
 
     update(title: @title)
+  end
+
+  def find_by_short_code
+    find(id)
   end
 
   private
