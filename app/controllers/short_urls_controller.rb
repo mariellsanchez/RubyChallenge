@@ -16,13 +16,14 @@ class ShortUrlsController < ApplicationController
   def show
     @single_url = ShortUrl.find(params[:id])
     @single_url.update_attribute(:click_count, @single_url.click_count += 1)
-    redirect_to @single_url.full_url , allow_other_host: true
+    redirect_to @single_url.full_url, allow_other_host: true
   end
 
   def create
     @short_url = ShortUrl.new(short_url_params)
 
     if @short_url.save
+      UpdateTitleJob.perform_later(@short_url)
       render json: {
         status: "SUCCESS",
         message: 'Short url saved',
