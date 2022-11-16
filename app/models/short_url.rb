@@ -2,7 +2,7 @@ class ShortUrl < ApplicationRecord
 
   CHARACTERS = [*'0'..'9', *'a'..'z', *'A'..'Z'].freeze
 
-  validate :validate_full_url
+  validates :full_url, url: true
 
   def short_code
   end

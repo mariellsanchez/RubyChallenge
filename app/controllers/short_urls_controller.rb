@@ -53,7 +53,7 @@ class ShortUrlsController < ApplicationController
   private
 
   def short_url_params
-    params.require(:full_url).permit(:tittle)
+    params.permit(:full_url)
   end
 
 end
