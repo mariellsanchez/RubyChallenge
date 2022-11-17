@@ -17,7 +17,7 @@ In this task I created a validators folder with a url_validator.rb file inside, 
 At first I got multiple mistakes in this task because the URLs I had created at first did not include de HTTPS protocol, once I fix that it worked as expected. In this method I also increment the click_count on the element.
 
 <h3> Task 4 </h3>
-Incrementing the click_count on the element in task 3 really helped me during this tasks. I created a get http request called 'top' and it returns the top 100 most frequently accesses short urls. I used the order descending method with the click_count attribute, then limited it to 100 so this would give me the result.
+Incrementing the click_count on the element in task 3 really helped me during this tasks. I used the order descending method with the click_count attribute, then limited it to 100 so this would give me the result.
 
 <h3> Task 5 </h3>
 For this I used Open-uri and Nokogiri for getting the tittle of the web page. This job is executed every time a new short_url is created.
