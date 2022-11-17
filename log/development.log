@@ -4329,3 +4329,20 @@ Processing by ShortUrlsController#index as */*
 Completed 200 OK in 24ms (Views: 22.2ms | ActiveRecord: 0.7ms | Allocations: 4094)
 
 
+Started GET "/1027" for 172.19.0.1 at 2022-11-16 07:06:20 +0000
+Cannot render console from 172.19.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (5.5ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by ShortUrlsController#show as */*
+  Parameters: {"id"=>"1027"}
+  [1m[36mShortUrl Load (3.0ms)[0m  [1m[34mSELECT `short_urls`.* FROM `short_urls` WHERE `short_urls`.`id` = 1027 LIMIT 1[0m
+  ↳ app/controllers/short_urls_controller.rb:17:in `show'
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/short_urls_controller.rb:18:in `show'
+  [1m[36mShortUrl Update (1.1ms)[0m  [1m[33mUPDATE `short_urls` SET `short_urls`.`click_count` = 1, `short_urls`.`updated_at` = '2022-11-16 07:06:21.237474' WHERE `short_urls`.`id` = 1027[0m
+  ↳ app/controllers/short_urls_controller.rb:18:in `show'
+  [1m[35m (9.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/short_urls_controller.rb:18:in `show'
+Redirected to http://localhost:3000www.google.com
+Completed 302 Found in 310ms (ActiveRecord: 13.9ms | Allocations: 5973)
+
+

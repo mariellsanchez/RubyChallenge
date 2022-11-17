@@ -7,7 +7,6 @@ class ShortUrl < ApplicationRecord
 
   validates :full_url, url: true
   
-
   def short_code
     short_code = id.to_s
   end
@@ -23,8 +22,12 @@ class ShortUrl < ApplicationRecord
     update(title: @title)
   end
 
+  def public_attributes
+    
+  end
+
   def find_by_short_code
-    find(id)
+    
   end
 
   private
