@@ -38,7 +38,6 @@ For setting up the environment you need to run the following commands
 
 <h3> To run the specs </h3>
     docker-compose -f docker-compose-test.yml run short-app-rspec
-    # This one gave me errors as well, multiple
 
 <h3> Run the web server </h3>
     docker-compose up
