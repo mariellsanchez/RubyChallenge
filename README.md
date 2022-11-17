@@ -31,3 +31,39 @@ Incrementing the click_count on the element in task 3 really helped me during th
 "The title of the web page for each of the shortened URLs should be fetched and stored in the database using a background job."
 For this I used Open-uri and Nokogiri for getting the tittle of the web page. This job is executed every time a new short_url is created.
 
+<h2> Set up </h2>
+For setting up the environment you need to run the following commands
+
+<h3> Intial Setup </h3>
+    docker-compose build
+    docker-compose up mariadb
+    # Once mariadb says it's ready for connections, you can use ctrl + c to stop it
+    docker-compose run short-app rails db:migrate
+    docker-compose -f docker-compose-test.yml build
+
+<h3> To run migrations </h3>
+    docker-compose run short-app rails db:migrate
+    docker-compose -f docker-compose-test.yml run short-app-rspec rails db:test:prepare
+
+<h3> To run the specs </h3>
+    docker-compose -f docker-compose-test.yml run short-app-rspec
+    # This one gave me errors as well, multiple
+
+<h3> Run the web server </h3>
+    docker-compose up
+
+<h2> Testing the API </h2>
+
+<h3> Adding a URL </h3>
+    curl -X POST -d "full_url=https://google.com" http://localhost:3000/short_urls.json
+
+<h3> Getting the top 100 </h3>
+    curl localhost:3000
+
+<h3> Checking your short URL redirect </h3>
+    curl -I localhost:3000/abc
+
+<h2> Last but no least </h2>
+Thank you for this opportunity :)
+
+- Mariell
